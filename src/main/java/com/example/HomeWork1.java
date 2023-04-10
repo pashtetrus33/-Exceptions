@@ -13,15 +13,22 @@ public class HomeWork1 {
         System.out.println("Number: " + getMemberByIndex(new int[]{4, 5, 6, 7,}, 1));
 
         //fileReading("file");
-        int[] result = substructElementsOfArray(new int[]{6, 8, 5, 4}, new int[]{0, 4, 7});
+        int[] result = substructElementsOfArray(new int[]{6, 8, 5}, new int[]{0, 4, 7});
         if (result != null) {
             printArray(result);
         }
 
-        result = divisionElementsOfArray(new int[]{8, 5, 4}, new int[]{0, 4, 7});
+        result = divisionElementsOfArray(new int[]{8, 5, 4}, new int[]{2, 4, 7});
         if (result != null) {
             printArray(result);
         }
+
+
+        final char FINDCHAR = '5';
+        final int STRINGNUMBER = 9;
+        System.out.println("Строка №" + STRINGNUMBER + ": "+ listGenerate(STRINGNUMBER));
+        System.out.println("Число цифр " + FINDCHAR + " в строке " + STRINGNUMBER + " равно " + countDigit(listGenerate(STRINGNUMBER),FINDCHAR));
+        System.out.println(countDigit(listGenerate(9),'5') + " " + countDigit(listGenerate(9),'7'));
     }
 
     //Метод 1 ArithmeticException
@@ -104,4 +111,38 @@ public class HomeWork1 {
         }
         System.out.println();
     }
+
+
+    /*Строки, состоящие из последовательностей цифр,
+          формируются следующим образом. Первая строка состоит из
+          четырех единиц. Каждая из последующих строк создается
+          следующим действием: берется предыдущая строка и после
+          каждой ее цифры вставляется цифра на единицу большая. Вот
+          первые 3 строки, созданные по этому правилу:
+          (1) 1111
+          (2) 12121212
+          (3) 1223122312231223
+          Сколько цифр 5 и сколько цифр 7 будет в строке с номером
+          (9)?
+          В ответе укажите через пробел два целых числа: сначала
+          количество цифр 5 в девятой строке, а затем количество цифр
+          7 в девятой строке*/
+
+    public static String listGenerate(int stringNumber) {
+        String result = "1 1 1 1";
+        String[] array;
+        for (int i = 0; i < stringNumber-1; i++) {
+            array = result.split(" ");
+            result = "";
+            for (String str : array) {
+                int num = Integer.parseInt(str) + 1;
+                result += str + " " + num + " ";
+            }
+        }
+        return result;
+    }
+    private static int countDigit(String str, char ch) {
+        return (int) str.chars().filter(c -> c == ch).count();
+    }
 }
+
